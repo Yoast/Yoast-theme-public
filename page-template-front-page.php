@@ -7,7 +7,7 @@ namespace Yoast\YoastCom\Theme;
 ?>
 <?php get_header(); ?>
 
-<?php get_template_part( 'html_includes/siteheader-home', array( 'home' => true ) ); ?>
+<?php get_template_part( 'html_includes/siteheader' ); ?>
 
 <div class="site">
 
