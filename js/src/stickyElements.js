@@ -1,13 +1,3 @@
-function setHomeBannerHeight() {
-	bannerHome = document.querySelector('[data-banner-home]');
-	headerHome = document.querySelector('[data-header-home]');
-
-	headerHeight= headerHome.offsetHeight;
-
-	bannerHome.style.height= (headerHeight + 20) + "px";
-}
-
-
 function setStickyElements() {
 
 	for (var i = 0; i < window.stickyEls.length; i++) {

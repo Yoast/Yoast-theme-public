@@ -30,9 +30,7 @@
     right: $spacing / 4;
     top: .4em;
 
-    .siteheader--home & {
-      top: .6em;
-    }
+
   }
 
   @media only screen and (min-width: $page-width-medium) {

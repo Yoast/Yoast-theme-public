@@ -25,29 +25,6 @@
 		width: 100%;
 	}
 
-	&--home {
-		position: absolute;
-		top: 0;
-		left: 0;
-
-		@media only screen and (max-width: $page-width-medium) {
-			top: 4em;
-			//display: none;
-		}
-
-		background: rgb(239, 176, 165) url(./../images/banners/home-small.jpg) no-repeat 50% 50% / cover;
-
-		@media only screen and (min-width: 500px) {
-			background-image: url(./../images/banners/home.jpg);
-		}
-
-		@media only screen and (min-width: $page-width-full) {
-			background-image: url(./../images/banners/home-large.jpg);
-			top: 0;
-			left: 0;
-		}
-	}
-
 	// Allow us to add banners in a dry way, just name the images correctly and add one line of SASS
 	@mixin banner( $name ) {
 		$image:  "./../images/banners/#{$name}";
