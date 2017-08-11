@@ -5,3 +5,11 @@
 .theme-plugins {
 	@include theme($scheme-plugins-primary, $scheme-plugins-secondary);
 }
+
+
+main.yoast_seo_for_wordpress_plugin{
+  ul li{
+    color: $color-black;
+  }
+
+}
