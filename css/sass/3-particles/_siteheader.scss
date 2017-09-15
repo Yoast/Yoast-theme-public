@@ -31,40 +31,38 @@ body {
     text-shadow: $text-shadow;
   }
 
-}
+  .masthead {
+    @media only screen and (max-width: $page-width-medium) {
+      position: fixed;
+      top: 0;
+      z-index: 99;
+      background-color: $color-pink-dark;
+      border-bottom: 1px solid $color-white;
 
-.masthead {
-  @media only screen and (max-width: $page-width-medium) {
-    position: fixed;
-    top: 0;
-    z-index: 99;
-    background-color: $color-pink-dark;
-    border-bottom: 1px solid $color-white;
+      .admin-bar & {
+        top: 46px;
+        @media only screen and(min-width: 783px) {
+          top: 32px;
+        }
+      }
+    }
 
-    .admin-bar & {
-      top: 46px;
-      @media only screen and(min-width: 783px) {
-        top: 32px;
+    /* Main site title */
+    .pagetitle {
+      width: 8em;
+      height: 4em;
+
+      margin: 0;
+      line-height: 1em;
+      display: block;
+
+      background: url(./../images/logo-diap.svg) no-repeat left;
+
+      @media only screen and (min-width: $page-width-medium) {
+        width: 19.5em;
+        height: 5.2em;
+        background-image: url(./../images/logo.svg);
       }
     }
   }
-  /* Main site title */
-  .pagetitle {
-    width: 8em;
-    height: 4em;
-
-    margin: 0;
-    line-height: 1em;
-    display: block;
-
-    background: url(./../images/logo-diap.svg) no-repeat left;
-
-    @media only screen and (min-width: $page-width-medium) {
-      width: 19.5em;
-      height: 5.2em;
-      background-image: url(./../images/logo.svg);
-    }
-
-  }
 }
-
