@@ -2,7 +2,7 @@ jQuery( document ).ready( function( $ ) {
     /**
      * Check if the searchfield has a value. If it has, set the class active
      */
-    $('.searchbar form input').on('keyup', function(){
+    $('header .searchbar form input').on('keyup', function(){
         if($(this).val()){
             $(this).addClass('active');
         } else {

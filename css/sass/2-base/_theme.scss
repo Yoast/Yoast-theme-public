@@ -108,4 +108,13 @@
       }
     }
   }
+  .content {
+    ul.ordered-list {
+      li {
+        &:before {
+          background-color: $color-secondary;
+        }
+      }
+    }
+  }
 }

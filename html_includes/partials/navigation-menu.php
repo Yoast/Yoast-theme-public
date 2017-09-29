@@ -15,21 +15,6 @@ if ( class_exists( 'Yoast\YoastCom\Menu\Menu_Structure' ) ) {
 		'menu_type'  => 'main'
 	) );
 
-	echo '<li class="controls">';
-
-	echo '<a class="cart" href="' . apply_filters( 'yoast:url', 'checkout' ) . '">';
-	echo '<img src="' . get_template_directory_uri() . '/images/cart.svg" alt="' . esc_attr( __( 'Shopping Cart', 'yoastcom' ) ) . '" />';
-	echo '<span class="visuallyhidden focusable">' . esc_html( __( 'Cart', 'yoastcom' ) ) . '</span>';
-	echo '<div class="num-items-container"><span class="num-items"></span></div>';
-	echo '</a>';
-
-	// Only for Yoast.com & my.yoast.com:
-	if ( class_exists( 'Yoast\YoastCom\VisitorCurrency\Currency_Controller' ) ) {
-		get_template_part( 'html_includes/partials/navigation-currency-switcher', Checkout_HTML::get_currency_switch_template_arguments() );
-	}
-
-	echo '</li>';
-
 	echo '</ul>'; // main menu
 	echo '</nav>'; // nav holder
 

@@ -2,7 +2,7 @@
 
 namespace Yoast\YoastCom\Theme;
 
-$cart = apply_filters( 'yoast:url', 'checkout' );
+$cart = apply_filters( 'yoast:url', 'cart' );
 
 ?>
 <div class="header-controls header-controls--mobile  hide-on-desktop">

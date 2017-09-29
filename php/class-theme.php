@@ -57,9 +57,6 @@ class Theme {
 		add_filter( 'comments_template_query_args', array( $this, 'reverse_comments_order' ) );
 
 		new Widget_Color_Setting();
-		new Ajax();
-		new Checkout_HTML();
-		new Checkout();
 		new Text_Changes();
 		new Term();
 		new Page_Academy_Settings();
@@ -155,18 +152,11 @@ class Theme {
 		// Third party libraries.
 		wp_register_style( 'chosen', $dir . '/css/includes/chosen.min.css', array(), '1.4.2' );
 		wp_register_script( 'chosen', $dir . '/js/includes/chosen.jquery.min.js', array( 'jquery' ), '1.4.2', true );
-		wp_register_script( 'jquery-validate', $dir . '/js/includes/jquery.validate.min.js', array( 'jquery' ), '1.14.0', true );
-		wp_register_script( 'jquery-payment', $dir . '/js/includes/jquery.payment.min.js', array( 'jquery' ), '1.3.2', true );
 
 		$this->register_asset( 'style', 'yoast-com', 'css/style.min.css', array() );
 
 		$this->register_asset( 'script', 'yoast-com', 'js/yoast.js', array( 'jquery' ) );
-		$this->register_asset( 'script', 'yoast-com-checkout', 'js/checkout.min.js', array(
-			'jquery',
-			'chosen',
-			'jquery-validate',
-			'jquery-payment',
-		) );
+
 		$this->register_asset( 'script', 'yoast-com-academy', 'js/academy.min.js', array(
 			'jquery',
 		) );
@@ -206,26 +196,6 @@ class Theme {
 		wp_enqueue_style( 'yoast-com' );
 		wp_enqueue_script( 'yoast-com' );
 
-		wp_localize_script(
-			'yoast-com',
-			'YoastAjax',
-			array(
-				'ajaxurl' => apply_filters( 'yoast:url', 'shop_counter_ajax' ),
-				'shop'    => apply_filters( 'yoast:url', 'shop_counter_ajax' ),
-				'admin'   => admin_url( 'admin-ajax.php' ),
-			)
-		);
-
-		wp_localize_script(
-			'yoast-com-checkout',
-			'YoastI18n',
-			array(
-				'loading'         => __( 'Loading', 'yoastcom' ),
-				'select_country'  => __( 'Please select a country first', 'yoastcom' ),
-				'select_currency' => __( 'Please select a currency first', 'yoastcom' ),
-			)
-		);
-
 		/**
 		 * Apply hotjar tracking code if supplied by the child theme.
 		 */
@@ -241,23 +211,11 @@ class Theme {
 			);
 		}
 
-		if ( function_exists( 'edd_is_checkout' ) && edd_is_checkout() ) {
-			wp_enqueue_style( 'chosen' );
-			wp_enqueue_script( 'yoast-com-checkout' );
-			wp_localize_script( 'yoast-com-checkout', 'yoast_com_checkout_vars', array(
-				'ajaxurl'        => edd_get_ajax_url(),
-				'checkout_nonce' => wp_create_nonce( 'edd_checkout_nonce' ),
-				'taxes_enabled'  => edd_use_taxes() ? '1' : '0',
-				'tax_rates'      => $this->get_tax_rates(),
-			) );
-		}
 
 		if ( is_singular( 'yoast_plugins' ) ) {
 			wp_enqueue_script( 'jquery-modal' );
 		}
 
-		// Remove the cross selling CSS because we overwrite it completely.
-		wp_deregister_style( 'edd-csau-css' );
 
 		if ( is_singular( array(
 				'post',
@@ -274,21 +232,6 @@ class Theme {
 
 			wp_localize_script( 'yoast-com-academy', 'AcademyAjax', array( 'ajaxurl' => apply_filters( 'yoast:domain', 'https://yoast.academy' ) . '/wp-admin/admin-ajax.php' ) );
 		}
-	}
-
-	/**
-	 * Get the tax rates in correct format
-	 */
-	private function get_tax_rates() {
-		$edd_tax_rates = edd_get_tax_rates();
-		$tax_rates     = array();
-		if ( count( $edd_tax_rates ) > 0 ) {
-			foreach ( $edd_tax_rates as $tax_rate ) {
-				$tax_rates[ $tax_rate['country'] ] = $tax_rate['rate'];
-			}
-		}
-
-		return $tax_rates;
 	}
 
 	/**
@@ -374,7 +317,7 @@ class Theme {
 	 * Registers sidebars
 	 */
 	private function register_sidebars() {
-		$args = array(
+		register_sidebars( 3, array(
 			'name'          => __( 'Footer %d', 'yoastcom' ),
 			'id'            => 'footer',
 			'description'   => '',
@@ -383,9 +326,7 @@ class Theme {
 			'after_widget'  => '</div>',
 			'before_title'  => '<span class="h4 widgettitle">',
 			'after_title'   => '</span>',
-		);
-
-		register_sidebars( 3, $args );
+		) );
 
 		register_sidebars( 3, array(
 			'name'          => __( 'Homepage Promo Block %d', 'yoastcom' ),

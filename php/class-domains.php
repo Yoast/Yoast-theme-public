@@ -44,9 +44,14 @@ class Domains {
 				return $domain . '/wordpress/plugins/';
 
 			case 'checkout':
-				$domain = apply_filters( 'yoast:domain', 'my.yoast.com' );
+				$domain = apply_filters( 'yoast:domain', 'yoast.com' );
 
 				return $domain . '/checkout/';
+
+			case 'cart':
+				$domain = apply_filters( 'yoast:domain', 'yoast.com' );
+
+				return $domain . '/cart/';
 
 			case 'newsletter':
 				$domain = apply_filters( 'yoast:domain', 'yoast.com' );

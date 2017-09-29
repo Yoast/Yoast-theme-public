@@ -65,7 +65,7 @@ $quiz_data = get_user_meta( $user_id, 'llms_quiz_data', true );
 							<div class="clear"></div>
 
 							<ul>
-								<?php if ( array_key_exists( 'option_text', $options[ $question['answer'] ] ) ) { ?>
+								<?php if ( isset( $options[ $question['answer'] ] ) && array_key_exists( 'option_text', $options[ $question['answer'] ] ) ) { ?>
 
 									<li>
 										<span class="llms-quiz-summary-label user-answer">
@@ -83,28 +83,24 @@ $quiz_data = get_user_meta( $user_id, 'llms_quiz_data', true );
 
 								<?php
 
-								if ( $options[ $question['answer'] ]['option_text'] !== $correct_option['option_text'] && $quiz->show_correct_answer() ) {
+								if ( ( ! isset( $options[ $question['answer'] ] ) || $options[ $question['answer'] ]['option_text'] !== $correct_option['option_text'] ) && $quiz->show_correct_answer() ) {
 									echo '<li><span class="llms-quiz-summary-label correct-answer">';
 									echo '<strong class="answer_correct">Correct answer:</strong><br>' . wp_kses_post( $correct_option['option_text'] );
 									echo '</span></li>';
 								}
 
-								if ( $question['correct'] ) {
-									if ( $quiz->show_description_right_answer() ) {
-										if ( array_key_exists( 'option_description', $options[ $question['answer'] ] ) ) {
-											echo '<li><span class="llms-quiz-summary-label clarification">' .
-                                                __( '<strong class="answer_clarification">Clarification:</strong><br>' . wpautop( $options[ $question['answer'] ]['option_description'] ) )
-											     . '</span></li>';
-										}
-									}
-								}
-								else {
-									if ( $quiz->show_description_wrong_answer() ) {
-										if ( array_key_exists( 'option_description', $options[ $question['answer'] ] ) ) {
-											echo '<li><span class="llms-quiz-summary-label clarification">' .
-                                                __( '<strong class="answer_clarification">Clarification:</strong><br>' . wpautop( $options[ $question['answer'] ]['option_description'] ) )
-											     . '</span></li>';
-										}
+								if (
+									isset( $options[ $question['answer'] ] ) &&
+									! empty( trim( $options[ $question['answer'] ]['option_description'] ) ) &&
+									array_key_exists( 'option_description', $options[ $question['answer'] ] )
+								) {
+									if ( ( $question['correct'] && $quiz->show_description_right_answer() ) || ( ! $question['correct'] && $quiz->show_description_wrong_answer() ) ) {
+										echo '<li><span class="llms-quiz-summary-label clarification">' .
+										     '<strong class="answer_clarification">' .
+										     __( 'Clarification:', 'yoastcom' ) .
+										     '</strong><br>' .
+										     wpautop( trim( $options[ $question['answer'] ]['option_description'] ) ) .
+										     '</span></li>';
 									}
 								}
 								?>

@@ -10,7 +10,7 @@ module.exports = {
 				'language-team': 'Yoast Translate',
 				'last-translator': 'Joost de Valk'
 			},
-			type: 'wp-theme',
+			type: 'wp-theme'
 		}
 	}
 };

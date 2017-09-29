@@ -1,9 +1,7 @@
 build:
   - 'sass:compressed'
   - 'uglify:dist'
-  - 'uglify:checkout'
   - 'uglify:academy'
-  - 'uglify:jquery-validate'
   - 'copy:assets'
 
 default:

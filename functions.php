@@ -9,7 +9,6 @@ namespace Yoast\YoastCom\Theme;
 
 require_once __DIR__ . '/php/functions-helpers.php';
 require_once __DIR__ . '/php/functions-links.php';
-require_once __DIR__ . '/php/functions-checkout.php';
 
 spl_autoload_register( function( $classname ) {
 	if ( false !== strpos( $classname, 'Yoast\\YoastCom\\Theme\\' ) ) {

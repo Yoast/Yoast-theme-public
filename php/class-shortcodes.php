@@ -28,7 +28,6 @@ class Shortcodes {
 		add_shortcode( 'sidebar-payment', array( $this, 'sidebar_payment_method' ) );
 		add_shortcode( 'testimonial', array( $this, 'testimonial' ) );
 		add_shortcode( 'yst_review_box', array( $this, 'review_box' ) );
-		add_shortcode( 'buy_buttons', array( $this, 'buy_buttons' ) );
 
 		// Deprecated shortcodes.
 		add_shortcode( 'box', array( $this, 'deprecate_box' ) );
@@ -486,34 +485,5 @@ class Shortcodes {
 
 	public function set_show_read_more( $enabled = true ) {
 		$this->show_read_more = (bool) $enabled;
-	}
-
-	/**
-	 * Returns buy buttons
-	 *
-	 * @param array $atts The shortcode attributes
-	 *
-	 * @return string
-	 */
-	public function buy_buttons( $atts = array() ) {
-		$args = wp_parse_args( $atts, array(
-			'id'    => post_meta( 'download_id' ),
-			'text'  => __( 'Buy %s', 'yoastcom' ),
-			'title' => '',
-		) );
-
-		if ( '' === $args['title'] ) {
-			$args['title'] = str_replace( ' for WordPress', '', get_the_title( $args['id'] ) );
-		}
-
-		$plugin_price    = edd_get_price_option_amount( $args['id'], 0 );
-		$plugin_buy_link = edd_get_checkout_uri() . '?yst_action_edd=add_to_cart&license=0&download_id=' . $args['id'];
-
-		$out = '<a rel="nofollow" href="'.$plugin_buy_link.'"
-   class="button default openmodal" data-modal-product-id="' . $args['id'] . '">' . sprintf( $args['text'], $args['title'], $plugin_price ) . '</a>';
-
-		Product_Options_Modal::add_product_modal( $args );
-
-		return $out;
 	}
 }

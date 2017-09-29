@@ -18,8 +18,6 @@ class Text_Changes {
 
 		add_action( 'wp_editor_expand', array( $this, 'reinstate_editor_for_posts_page' ) );
 
-		add_filter( 'edd_payment_receipt_products_title', array( $this, 'edd_payment_receipt_products_title' ) );
-
 		add_filter( 'oembed_result', array( $this, 'add_video_container' ), 10, 2 );
 
 		add_filter( 'comment_form_defaults', array( $this, 'comment_form_labels' ) );
@@ -72,18 +70,6 @@ class Text_Changes {
 		return $title;
 	}
 
-	/**
-	 * Add a notice to the receipt that products include the VAT
-	 *
-	 * @param string $title The current title.
-	 *
-	 * @return string
-	 */
-	public function edd_payment_receipt_products_title( $title ) {
-		$title .= ' <small>(incl. VAT)</small>';
-
-		return $title;
-	}
 
 	/**
 	 * Adds responsive video container to youtube auto embed
